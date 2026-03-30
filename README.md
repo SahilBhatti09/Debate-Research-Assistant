@@ -48,7 +48,7 @@ Debate Research Assistant/
 1. **Clone the repository**
 
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/SahilBhatti09/Debate-Research-Assistant
    cd "Debate Research Assistant"
    ```
 
@@ -150,58 +150,43 @@ Starts an interactive terminal session. Type your question or motion and receive
 
 Building and working with this project provides hands-on experience with the following concepts:
 
-### Retrieval-Augmented Generation (RAG)
+### 1. Retrieval-Augmented Generation (RAG)
 - Designing an end-to-end RAG pipeline that combines retrieval with generative AI to produce grounded, evidence-backed responses.
 - Understanding how vector similarity search retrieves relevant context from a large corpus before generation.
 
-### LangChain Framework
+### 2. LangChain Framework
 - Using LangChain components — document loaders, text splitters, embeddings, vector stores, retrievers, and prompt templates — to build a modular AI application.
 - Composing a multi-step pipeline where each stage (retrieval → context evaluation → generation) feeds into the next.
 
-### Vector Databases & Embeddings
+### 3. Vector Databases & Embeddings
 - Converting unstructured text (PDFs, JSONL, web pages) into vector embeddings using sentence-transformers (`all-MiniLM-L6-v2`).
 - Storing and querying embeddings with ChromaDB, including persistence across sessions and tuning retrieval parameters (e.g., `k=10`).
 
-### Multi-Source Data Ingestion
+### 4. Multi-Source Data Ingestion
 - Loading and normalising documents from diverse formats: JSONL speech transcripts, PDF files (via PyMuPDF), and live web pages (via WebBaseLoader).
 - Downloading remote files from Google Drive programmatically.
 - Splitting large documents into overlapping chunks for effective retrieval.
 
-### Large Language Model Integration
+### 5. Large Language Model Integration
 - Integrating a cloud-hosted LLM (Mistral AI) through LangChain's chat model interface.
 - Crafting system prompts that enforce structured, domain-specific output (debate format, tone, argument flow).
 - Controlling generation behaviour with parameters like `temperature`.
 
-### Fallback & Resilience Patterns
+### 6. Fallback & Resilience Patterns
 - Implementing a graceful fallback mechanism: when local retrieval context is insufficient (< 300 characters), the system dynamically augments with live Tavily web search results.
 - Handling multiple result formats (list, dict, string) from external APIs.
 
-### Streamlit for Rapid Prototyping
+### 7. Streamlit for Rapid Prototyping
 - Building an interactive web UI with Streamlit — form inputs, radio buttons, dropdowns, spinners, and markdown rendering.
 - Connecting a frontend to a Python backend module with a simple function import.
 
-### Prompt Engineering
+### 8. Prompt Engineering
 - Designing effective system prompts that set priorities, structure, and tone for LLM output.
 - Separating system-level instructions from user-level context injection in `ChatPromptTemplate`.
 
-### Environment & Dependency Management
+### 9. Environment & Dependency Management
 - Managing API keys securely with `.env` files and `python-dotenv`.
 - Tracking project dependencies in `requirements.txt`.
-
-## Suggestions & Future Improvements
-
-- [ ] **Add a `.gitignore`** — exclude `.env`, `debate_db/`, `venv/`, `.DS_Store`, `__pycache__/`, and large media files from version control.
-- [ ] **Pin dependency versions** in `requirements.txt` (e.g., `streamlit==1.38.0`) for reproducible builds.
-- [ ] **Fix `speeches.jsonl` path** — the code expects `speeches.jsonl` at the project root, but the bundled copy lives in `RAG resources/`. Update `LOCAL_JSONL_FILE` to point to `RAG resources/speeches.jsonl` or add a symlink.
-- [ ] **Remove unused import** — `Chroma` from `langchain_community.vectorstores` is imported but never used; only `ChromaUpdated` from `langchain_chroma` is used.
-- [ ] **Lazy-load the vector store** — currently the vectorstore is built at module import time, which slows every Streamlit reload. Consider deferring it with `@st.cache_resource` or a lazy initialization pattern.
-- [ ] **Add unit / integration tests** — validate retrieval quality, prompt formatting, and API fallback behaviour.
-- [ ] **Use Git LFS for large files** — `speeches.jsonl` and `.mov` recordings are large; use Git LFS or host them externally to keep the repo lightweight.
-- [ ] **Add a `pyproject.toml`** — for modern Python packaging, metadata, and optional tool configuration (linting, formatting).
-
-## License
-
-This project is for educational and research purposes.
 
 ---
 
